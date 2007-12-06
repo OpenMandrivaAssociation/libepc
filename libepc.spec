@@ -19,7 +19,7 @@ BuildRequires: libgnutls-devel
 BuildRequires: libsoup-devel
 BuildRequires: avahi-client-devel avahi-glib-devel
 BuildRequires: libext2fs-devel
-BuildRequires: gtk+2-devel
+BuildRequires: avahi-ui-devel
 
 %description
 The Easy Publish and Consume library provides an easy method to:
