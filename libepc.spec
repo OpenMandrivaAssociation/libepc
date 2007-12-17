@@ -1,6 +1,6 @@
 %define name libepc
-%define version 0.3.0
-%define release %mkrel 3
+%define version 0.3.1
+%define release %mkrel 1
 %define api 1.0
 %define major 1
 %define libname %mklibname epc %api %major
