@@ -14,7 +14,6 @@ Source0: ftp://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/%{name}-%{version}.
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: libgnutls-devel
 BuildRequires: libsoup-devel
 BuildRequires: avahi-client-devel avahi-glib-devel
