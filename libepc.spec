@@ -1,6 +1,6 @@
 %define name libepc
 %define version 0.3.1
-%define release %mkrel 1
+%define release %mkrel 2
 %define api 1.0
 %define major 1
 %define libname %mklibname epc %api %major
@@ -10,7 +10,8 @@ Summary: Easy Publish and Consume library
 Name: %{name}
 Version: %{version}
 Release: %{release}
-Source0: ftp://ftp.gnome.org/pub/GNOME/sources/gnome-keyring/%{name}-%{version}.tar.bz2
+Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
+Patch: libepc-0.3.1-gio-include.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -19,6 +20,7 @@ BuildRequires: libsoup-devel
 BuildRequires: avahi-client-devel avahi-glib-devel
 BuildRequires: libext2fs-devel
 BuildRequires: avahi-ui-devel
+BuildRequires: glib2-devel >= 2.15
 
 %description
 The Easy Publish and Consume library provides an easy method to:
@@ -66,6 +68,7 @@ using encryption, authentication and service discovery.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
 %configure2_5x
