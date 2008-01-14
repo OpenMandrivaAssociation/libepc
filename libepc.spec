@@ -1,8 +1,8 @@
 %define name libepc
-%define version 0.3.1
-%define release %mkrel 2
+%define version 0.3.2
+%define release %mkrel 1
 %define api 1.0
-%define major 1
+%define major 0
 %define libname %mklibname epc %api %major
 %define develname %mklibname -d epc
 
@@ -11,7 +11,6 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
-Patch: libepc-0.3.1-gio-include.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -69,7 +68,6 @@ using encryption, authentication and service discovery.
 
 %prep
 %setup -q
-%patch -p1
 
 %build
 %configure2_5x
