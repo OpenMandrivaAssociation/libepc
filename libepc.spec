@@ -1,5 +1,5 @@
 %define name libepc
-%define version 0.3.3
+%define version 0.3.4
 %define release %mkrel 1
 %define api 1.0
 %define major 1
@@ -33,9 +33,26 @@ The Easy Publish and Consume library provides an easy method to:
 You can use this library as key/value store published to the network,
 using encryption, authentication and service discovery.
 
+%package i18n
+Summary: Easy Publish and Consume library
+Group: System/Libraries
+
+%description i18n
+The Easy Publish and Consume library provides an easy method to:
+
+* publish data per HTTPS
+* announce that information via DNS-SD
+* find that information
+* and finally consume it
+
+You can use this library as key/value store published to the network,
+using encryption, authentication and service discovery.
+
+
 %package -n %{libname}
 Group: System/Libraries
 Summary: Easy Publish and Consume library
+Requires: %{name}-i18n >= %version
 
 %description -n %{libname}
 The Easy Publish and Consume library provides an easy method to:
@@ -77,6 +94,7 @@ make
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 rm -f %buildroot%_libdir/libepc*.a
+%find_lang %name
 
 %check
 #gw make check needs a running avahi daemon
@@ -87,6 +105,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %post -n %libname -p /sbin/ldconfig
 %postun -n %libname -p /sbin/ldconfig
+
+%files i18n -f %name.lang
+%defattr(-,root,root)
 
 %files -n %libname
 %defattr(-,root,root)
