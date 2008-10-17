@@ -1,6 +1,6 @@
 %define name libepc
-%define version 0.3.5
-%define release %mkrel 2
+%define version 0.3.6
+%define release %mkrel 1
 %define api 1.0
 %define major 1
 %define libname %mklibname epc %api %major
@@ -89,7 +89,7 @@ using encryption, authentication and service discovery.
 
 %build
 %configure2_5x
-make
+%make LIBS=-lgthread-2.0
 
 %install
 rm -rf $RPM_BUILD_ROOT
