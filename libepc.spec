@@ -21,7 +21,7 @@ BuildRequires: avahi-client-devel avahi-glib-devel
 BuildRequires: libext2fs-devel
 BuildRequires: avahi-ui-devel
 BuildRequires: glib2-devel >= 2.15
-BuildRequires: perl-XML-Parser
+BuildRequires: intltool
 
 %description
 The Easy Publish and Consume library provides an easy method to:
