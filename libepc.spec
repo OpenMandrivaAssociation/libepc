@@ -1,5 +1,5 @@
 %define name libepc
-%define version 0.3.6
+%define version 0.3.7
 %define release %mkrel 1
 %define api 1.0
 %define major 1
@@ -89,7 +89,7 @@ using encryption, authentication and service discovery.
 
 %build
 %configure2_5x
-%make LIBS=-lgthread-2.0
+%make
 
 %install
 rm -rf $RPM_BUILD_ROOT
