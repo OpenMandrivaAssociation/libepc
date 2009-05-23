@@ -1,5 +1,5 @@
 %define name libepc
-%define version 0.3.9
+%define version 0.3.10
 %define release %mkrel 1
 %define api 1.0
 %define major 2
