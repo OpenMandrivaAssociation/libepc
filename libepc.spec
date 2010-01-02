@@ -1,6 +1,6 @@
 %define name libepc
 %define version 0.3.10
-%define release %mkrel 1
+%define release %mkrel 2
 %define api 1.0
 %define major 2
 %define libname %mklibname epc %api %major
@@ -18,7 +18,11 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: libgnutls-devel
 BuildRequires: libsoup-devel
 BuildRequires: avahi-client-devel avahi-glib-devel
+%if %mdvver < 201000
 BuildRequires: libext2fs-devel
+%else
+BuildRequires: libuuid-devel
+%endif
 BuildRequires: avahi-ui-devel
 BuildRequires: glib2-devel >= 2.15
 BuildRequires: intltool
