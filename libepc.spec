@@ -1,31 +1,26 @@
-%define name libepc
-%define version 0.3.11
-%define release %mkrel 4
-%define api 1.0
-%define major 2
-%define libname %mklibname epc %api %major
+%define %{api} 1.0
+%define major 3
+%define libname %mklibname epc %{api} %major
+%define libnameui %mklibname epc-ui %{api} %major
 %define develname %mklibname -d epc
+%define develnameui %mklibname -d epc-ui
 
 Summary: Easy Publish and Consume library
-Name: %{name}
-Version: %{version}
-Release: %{release}
-Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
+Name: libepc
+Version: 0.4.3
+Release: 1
+Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: libgnutls-devel
-BuildRequires: libsoup-devel
-BuildRequires: avahi-client-devel avahi-glib-devel
-%if %mdvver < 201000
-BuildRequires: libext2fs-devel
-%else
-BuildRequires: libuuid-devel
-%endif
-BuildRequires: avahi-ui-devel
-BuildRequires: glib2-devel >= 2.15
+
 BuildRequires: intltool
+BuildRequires: pkgconfig(libsoup-2.4)
+BuildRequires: pkgconfig(avahi-ui) >= 0.6
+BuildRequires: pkgconfig(avahi-ui-gtk3) >= 0.6
+BuildRequires: pkgconfig(gnutls) >= 1.4
+BuildRequires: pkgconfig(uuid) >= 1.36
+BuildRequires: pkgconfig(gtk+-2.0) >= 2.10
 
 %description
 The Easy Publish and Consume library provides an easy method to:
@@ -57,7 +52,6 @@ using encryption, authentication and service discovery.
 %package -n %{libname}
 Group: System/Libraries
 Summary: Easy Publish and Consume library
-Requires: %{name}-i18n >= %version
 
 %description -n %{libname}
 The Easy Publish and Consume library provides an easy method to:
@@ -70,73 +64,66 @@ The Easy Publish and Consume library provides an easy method to:
 You can use this library as key/value store published to the network,
 using encryption, authentication and service discovery.
 
-%package -n %develname
+%package -n %{libnameui}
+Group: System/Libraries
+Summary: Easy Publish and Consume library
+
+%description -n %{libnameui}
+Libraries for %{name}-ui
+
+%package -n %{develname}
 Group: Development/C
 Summary: Easy Publish and Consume library
-Requires: %libname = %version
-Provides: libepc-devel = %version-%release
+Requires: %{libname} = %{version}-%{release}
+Provides: libepc-devel = %{version}-%{release}
 
-%description -n %develname
-The Easy Publish and Consume library provides an easy method to:
+%description -n %{develname}
+%{name} development headers and libraries.
 
-* publish data per HTTPS
-* announce that information via DNS-SD
-* find that information
-* and finally consume it
+%package -n %{develnameui}
+Group: Development/C
+Summary: Easy Publish and Consume library
+Requires: %{libnameui} = %{version}-%{release}
 
-You can use this library as key/value store published to the network,
-using encryption, authentication and service discovery.
-
+%description -n %{develnameui}
+%{name}-ui development headers and libraries.
 
 %prep
 %setup -q
 
 %build
-%configure2_5x
+%configure2_5x \
+	--disable-static
+
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std
-rm -f %buildroot%_libdir/libepc*.a
-%find_lang %name
+rm -f %{buildroot}%{_libdir}/libepc*.la
+%find_lang %{name}
 
 %check
 #gw make check needs a running avahi daemon
 #make check
 
-%clean
-rm -rf $RPM_BUILD_ROOT
+%files i18n -f %{name}.lang
 
-%if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libname -p /sbin/ldconfig
-%endif
+%files -n %{libname}
+%{_libdir}/libepc-%{api}.so.%{major}*
 
-%files i18n -f %name.lang
-%defattr(-,root,root)
+%files -n %libuiname
+%{_libdir}/libepc-ui-%{api}.so.%{major}*
 
-%files -n %libname
-%defattr(-,root,root)
-%doc README
-%_libdir/libepc-%api.so.%{major}*
-%_libdir/libepc-ui-%api.so.%{major}*
+%files -n %{develname}
+%doc NEWS ChangeLog AUTHORS README
+%{_includedir}/libepc-%{api}
+%{_libdir}/libepc-%{api}.so
+%{_libdir}/pkgconfig/libepc-%{api}.pc
+%{_datadir}/gtk-doc/html/libepc-%{api}
 
-%files -n %develname
-%defattr(-,root,root)
-%doc NEWS ChangeLog AUTHORS
-%_libdir/libepc-%api.so
-%_libdir/libepc-ui-%api.so
-%_libdir/libepc-%api.la
-%_libdir/libepc-ui-%api.la
-%_includedir/libepc-%api
-%_includedir/libepc-ui-%api
-%_libdir/pkgconfig/libepc-%api.pc
-%_libdir/pkgconfig/libepc-ui-%api.pc
-%_datadir/gtk-doc/html/libepc-%api
-
-
-
+%files -n %{develnameui}
+%{_includedir}/libepc-ui-%{api}
+%{_libdir}/libepc-ui-%{api}.so
+%{_libdir}/pkgconfig/libepc-ui-%{api}.pc
 
