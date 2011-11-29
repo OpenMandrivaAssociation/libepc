@@ -1,4 +1,4 @@
-%define %{api} 1.0
+%define api 1.0
 %define major 3
 %define libname %mklibname epc %{api} %major
 %define libnameui %mklibname epc-ui %{api} %major
@@ -112,7 +112,7 @@ rm -f %{buildroot}%{_libdir}/libepc*.la
 %files -n %{libname}
 %{_libdir}/libepc-%{api}.so.%{major}*
 
-%files -n %libuiname
+%files -n %libnameui
 %{_libdir}/libepc-ui-%{api}.so.%{major}*
 
 %files -n %{develname}
