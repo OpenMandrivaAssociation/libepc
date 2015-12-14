@@ -5,6 +5,9 @@
 %define devname %mklibname -d epc
 %define devnameui %mklibname -d epc-ui
 
+%define _disable_rebuild_configure 1
+%define _disable_lto 1
+
 Summary:	Easy Publish and Consume library
 Name:		libepc
 Version:	0.4.4
