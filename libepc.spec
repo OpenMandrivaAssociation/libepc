@@ -18,7 +18,6 @@ Url:		http://www.gnome.org/
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 
 BuildRequires:	intltool
-BuildRequires:	pkgconfig(avahi-ui) >= 0.6
 BuildRequires:	pkgconfig(avahi-ui-gtk3) >= 0.6
 BuildRequires:	pkgconfig(gnutls) >= 1.4
 BuildRequires:	pkgconfig(gtk+-2.0) >= 2.10
