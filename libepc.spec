@@ -11,7 +11,7 @@
 Summary:	Easy Publish and Consume library
 Name:		libepc
 Version:	0.4.6
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
