@@ -17,6 +17,11 @@ Group:		System/Libraries
 Url:		https://www.gnome.org/
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	intltool
 BuildRequires:	pkgconfig(avahi-ui-gtk3) >= 0.6
 BuildRequires:	pkgconfig(gnutls) >= 1.4
